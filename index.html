@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digisoft Gift Shop | Premium Gifts for Every Occasion</title>
+  <meta name="description"
+    content="Discover the world's best collection of premium and customized gifts at Digisoft Gift Shop. Perfect for birthdays, anniversaries, and corporate events.">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <nav>
+    <div class="logo">DIGISOFT</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-icons">
+      <div class="search-trigger" id="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <i class="fa-solid fa-heart"></i>
+      <i class="fa-solid fa-bag-shopping"></i>
+    </div>
+  </nav>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="close-search" id="close-search">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search for gifts, categories...">
+      <div class="search-hint">Type your search and press <b>Enter</b> to see all results</div>
+      <div id="search-results-preview" class="search-results-preview"></div>
+    </div>
+  </div>
+
+  <header class="hero" id="home">
+    <div class="hero-bg">
+      <img src="/images/hero.png" alt="Luxury Gifts">
+    </div>
+    <div class="hero-content">
+      <h1>Crafting Memories with <span style="color: var(--primary)">Exquisite</span> Gifts</h1>
+      <p>Explore a curated collection of premium gifts designed to make every moment unforgettable. From personalized
+        treasures to luxury hampers.</p>
+      <div class="cta-group">
+        <button class="btn btn-primary">Shop Collection</button>
+        <button class="btn btn-outline">View Categories</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="categories">
+    <div class="section-header">
+      <h2>Shop by Category</h2>
+      <div class="line"></div>
+    </div>
+    <div class="category-grid">
+      <div class="category-card">
+        <img src="/images/customized.png" alt="Customized Gifts">
+        <div class="category-overlay">
+          <h3>Customized Gifts</h3>
+          <p>Personalized with love</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <img src="/images/anniversary.png" alt="Anniversary Gifts">
+        <div class="category-overlay">
+          <h3>Anniversary Specials</h3>
+          <p>Celebrate your bond</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=2040&auto=format&fit=crop"
+          alt="Corporate Gifts">
+        <div class="category-overlay">
+          <h3>Corporate Gifting</h3>
+          <p>Professional excellence</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="featured" style="background: var(--bg-surface)">
+    <div class="section-header">
+      <h2>Featured Treasures</h2>
+      <div class="line"></div>
+    </div>
+    <div class="product-grid" id="product-container">
+      <!-- Products will be injected by JavaScript -->
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom: 20px;">DIGISOFT</div>
+        <p style="color: var(--text-muted)">The world's premier destination for luxury gifting and personalized experiences. Crafting memories that last a lifetime.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#categories">Categories</a></li>
+          <li><a href="#featured">Featured</a></li>
+          <li><a href="#about">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Return Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Stay Inspired</h4>
+        <div class="newsletter-box">
+          <p style="color: var(--text-muted)">Join our exclusive circle for new arrivals and gift inspiration.</p>
+          <div class="input-group">
+            <input type="email" placeholder="Your Email Address">
+            <button class="btn btn-primary">Subscribe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Digisoft Gift Shop. All rights reserved.</p>
+      <div class="dev-credit">
+        Developed by <span>Digify Soft Solutions</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
