@@ -1737,6 +1737,12 @@ const initContactForm = () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+  // Safety reset for overlays on page load to prevent persistent active states on refresh
+  ['checkout-overlay', 'razorpay-sim-overlay', 'order-success-overlay'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+
   renderProducts();
   updateCartUI();
   updateWishlistUI();
