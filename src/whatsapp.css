@@ -1,0 +1,466 @@
+/* CSS Styles for Digisoft WhatsApp Simulator */
+
+body.whatsapp-page {
+  background-color: #0b0b0b !important;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+}
+
+.whatsapp-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1.2rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(11, 11, 11, 0.85);
+  backdrop-filter: blur(15px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.whatsapp-nav .badge {
+  font-size: 0.65rem;
+  background: #25d366;
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 5px;
+  font-weight: 800;
+}
+
+.sim-badge {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(37,211,102,0.08);
+  padding: 6px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(37,211,102,0.2);
+}
+
+.sim-badge .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 0 8px #25d366;
+  display: inline-block;
+  animation: pulseSim 1.5s infinite;
+}
+
+@keyframes pulseSim {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+/* Page Layout */
+.whatsapp-main {
+  padding: 130px 5% 100px;
+}
+
+.whatsapp-layout-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.sim-info-panel h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.sim-info-panel > p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+/* Event Logs and triggers List */
+.trigger-logs-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.trigger-logs-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.8rem;
+  color: var(--primary);
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 10px;
+}
+
+.trigger-guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.trigger-guide-list li {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.trigger-guide-list li.highlight {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.guide-num {
+  width: 32px;
+  height: 32px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.trigger-guide-list li.highlight .guide-num {
+  background: var(--primary);
+  color: #000;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.4);
+}
+
+.trigger-guide-list h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: white;
+}
+
+.trigger-guide-list p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Smartphone Wrapper Simulation */
+.phone-simulation-side {
+  display: flex;
+  justify-content: center;
+}
+
+.sim-smartphone {
+  width: 330px;
+  height: 660px;
+  background: #000;
+  border: 12px solid #2e2e2e;
+  border-radius: 44px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px rgba(37, 211, 102, 0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Phone Speaker & Camera Notch */
+.phone-notch {
+  width: 130px;
+  height: 22px;
+  background: #2e2e2e;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.phone-notch .speaker {
+  width: 45px;
+  height: 3px;
+  background: #111;
+  border-radius: 10px;
+}
+
+.phone-notch .camera {
+  width: 8px;
+  height: 8px;
+  background: #111;
+  border-radius: 50%;
+}
+
+.phone-status-bar {
+  background: #128C7E;
+  height: 45px;
+  padding: 22px 20px 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #fff;
+  z-index: 90;
+  font-weight: 600;
+}
+
+.phone-status-bar .icons {
+  display: flex;
+  gap: 6px;
+}
+
+/* inner whatsapp layout */
+.whatsapp-frame-inner {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0b141a;
+  position: relative;
+}
+
+.whatsapp-frame-inner .chat-header {
+  background: #1f2c34;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.whatsapp-frame-inner .chat-header i {
+  color: #8696a0;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.whatsapp-frame-inner .chat-header .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #128C7E;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.whatsapp-frame-inner .chat-header .contact-info {
+  flex-grow: 1;
+}
+
+.whatsapp-frame-inner .chat-header .contact-info h4 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.verify-badge {
+  color: #25d366;
+  font-size: 0.75rem !important;
+}
+
+.whatsapp-frame-inner .chat-header .contact-info span {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.whatsapp-frame-inner .chat-header .header-actions {
+  display: flex;
+  gap: 12px;
+  color: #8696a0;
+  font-size: 0.85rem;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.date-header {
+  align-self: center;
+  background: #182229;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  color: #8696a0;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.info-nudge {
+  align-self: center;
+  background: #182229;
+  border: 1px solid rgba(255,229,150,0.05);
+  color: #ffe596;
+  text-align: center;
+  font-size: 0.68rem;
+  border-radius: 8px;
+  padding: 6px 12px;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+.msg.received {
+  align-self: flex-start;
+  background: #202c33;
+  color: #e9edef;
+  border-top-left-radius: 0;
+  animation: slideInChat 0.3s ease;
+}
+
+.msg.sent {
+  align-self: flex-end;
+  background: #005c4b;
+  color: #e9edef;
+  border-top-right-radius: 0;
+  animation: slideInChat 0.3s ease;
+}
+
+.double-tick {
+  color: #53bdeb;
+  font-size: 0.65rem;
+  margin-left: 5px;
+  vertical-align: bottom;
+}
+
+@keyframes slideInChat {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+}
+
+/* Custom PDF document attachment bubble styling */
+.pdf-doc-attachment {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pdf-doc-attachment:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doc-info i {
+  font-size: 1.6rem;
+  color: #ff4a4a;
+}
+
+.doc-name h5 {
+  font-size: 0.8rem;
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.doc-name span {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.doc-download-btn {
+  font-size: 0.95rem;
+  color: #8696a0;
+}
+
+/* Input area */
+.input-panel {
+  background: #1f2c34;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-panel i {
+  color: #8696a0;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.input-panel input {
+  flex-grow: 1;
+  background: #2a3942;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.input-panel button {
+  background: #128c7e;
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.input-panel button:hover {
+  background: #25d366;
+}
+
+/* Responsive queries */
+@media (max-width: 1024px) {
+  .whatsapp-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}

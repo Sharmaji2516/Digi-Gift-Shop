@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Proposal & Commercials | Digisoft Gift Shop</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/proposal.css">
+</head>
+
+<body class="proposal-page">
+  <!-- Nav Bar -->
+  <nav class="proposal-nav">
+    <div class="logo">DIGISOFT <span class="badge">PROPOSAL</span></div>
+    <ul class="nav-links">
+      <li><a href="/index.html" style="display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>Storefront</a></li>
+      <li><a href="/whatsapp.html" style="display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>WhatsApp Sim</a></li>
+      <li><a href="/admin.html" style="display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="1" x2="12" y2="23"></line>
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>Admin ERP</a></li>
+    </ul>
+    <div class="nav-icons">
+      <div class="sim-badge" style="background: rgba(197, 160, 89, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(197, 160, 89, 0.25);">
+        Interactive Document
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="proposal-section proposal-hero">
+    <div class="hero-container">
+      <div class="hero-pill">
+        <i class="fa-solid fa-gift"></i> Digify Soft Solutions Partnership Proposal
+      </div>
+      <h1>Premium Gift Shop E-Commerce & WhatsApp AI Bot</h1>
+      <p class="subtitle">A complete digital solution that transforms customer experience, automates warehouse and dispatch checklists, and handles conversational sales directly on WhatsApp.</p>
+      
+      <div class="proposal-benefits-summary">
+        <div class="summary-card">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <h3>WhatsApp Commerce</h3>
+          <p>Browse catalog, manage shopping carts, and place orders natively within WhatsApp.</p>
+        </div>
+        <div class="summary-card">
+          <i class="fa-solid fa-robot"></i>
+          <h3>Multilingual AI Agent</h3>
+          <p>Instant answers to queries, bulk inquiry qualifiers, and smart customer handover in English & Hindi.</p>
+        </div>
+        <div class="summary-card">
+          <i class="fa-solid fa-boxes-stacked"></i>
+          <h3>Real-time ERP Sync</h3>
+          <p>Keep inventory numbers, product pricing, and fragile packaging checklists in complete sync.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stepper Journey Visualizer -->
+  <section class="proposal-section" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+    <div class="section-container">
+      <span class="section-tag">User Experience Flow</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;">End-to-End Customer Journey</h2>
+      <p style="color: var(--text-muted); margin-bottom: 3rem; max-width: 800px;">Click on any step below to see how customer orders, WhatsApp notifications, and warehouse ERP interact in real-time.</p>
+
+      <div class="journey-visualizer-container">
+        <div class="journey-flow">
+          <div class="journey-step active" data-step="1">
+            <div class="step-num">1</div>
+            <h4>Discovery</h4>
+            <p>Storefront Visit / Ads</p>
+          </div>
+          <div class="journey-step" data-step="2">
+            <div class="step-num">2</div>
+            <h4>AI Nudge</h4>
+            <p>WhatsApp Help</p>
+          </div>
+          <div class="journey-step" data-step="3">
+            <div class="step-num">3</div>
+            <h4>Checkout</h4>
+            <p>Direct Cart Order</p>
+          </div>
+          <div class="journey-step" data-step="4">
+            <div class="step-num">4</div>
+            <h4>ERP Log</h4>
+            <p>Stock & Invoice Sync</p>
+          </div>
+          <div class="journey-step" data-step="5">
+            <div class="step-num">5</div>
+            <h4>Delivery</h4>
+            <p>AWB & PDF Invoice</p>
+          </div>
+        </div>
+
+        <div class="journey-step-details" id="journey-details">
+          <b>Step 1 - Discovery:</b> Customer lands on your e-commerce storefront looking for crockery or clicks a targeted Instagram/Facebook ad that triggers a Click-to-WhatsApp session.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive AI Bot Sandbox -->
+  <section class="proposal-section" id="ai-bot">
+    <div class="section-container">
+      <div class="ai-grid">
+        <div class="ai-info-side">
+          <span class="section-tag">Interactive Preview</span>
+          <h2>Multilingual Sales Assistant</h2>
+          <p>Try the simulated AI bot on the phone mockup. It demonstrates real-time responses to queries regarding crockery catalog, custom gifts, bulk orders, and bilingual communication.</p>
+
+          <div class="ai-use-cases">
+            <h4>Tap to Test Prompt Chips:</h4>
+            <div class="use-case-chips">
+              <button class="chip-btn" data-query="suggest a dinner set for 6 people under ₹5,000">Dinner Set under ₹5,000</button>
+              <button class="chip-btn" data-query="show gift ideas for housewarming">Housewarming Gift Ideas</button>
+              <button class="chip-btn" data-query="do you have microwave-safe bowls?">Microwave-safe bowls</button>
+              <button class="chip-btn" data-query="can i order bulk return gifts for a wedding?">Bulk Wedding Hampers</button>
+              <button class="chip-btn" data-query="क्या यह हिंदी में बात कर सकता है?">Talk in Hindi (हिंदी)</button>
+            </div>
+          </div>
+
+          <div class="ai-capabilities-list">
+            <div class="capability-item">
+              <i class="fa-solid fa-bolt"></i>
+              <div>
+                <h5>Instant FAQ & Product Recommendations</h5>
+                <p>Retrieves specific SKU options matching customer constraints from Firestore.</p>
+              </div>
+            </div>
+            <div class="capability-item">
+              <i class="fa-solid fa-language"></i>
+              <div>
+                <h5>Bilingual Processing</h5>
+                <p>Smooth translation and support in English and Hindi to capture a wider customer base.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-sandbox-mock">
+          <div class="smartphone-frame">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen">
+              <div class="whatsapp-header">
+                <i class="fa-solid fa-chevron-left"></i>
+                <div class="avatar">DA</div>
+                <div class="contact-name">
+                  <h4>Digisoft AI Assistant</h4>
+                  <span>Online</span>
+                </div>
+                <div class="header-actions">
+                  <i class="fa-solid fa-video"></i>
+                  <i class="fa-solid fa-phone"></i>
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+              </div>
+              <div class="chat-messages" id="chat-area">
+                <div class="system-time">TODAY</div>
+                <div class="msg system">
+                  🔒 Messages are end-to-end encrypted. No one outside this chat can read them.
+                </div>
+                <div class="msg bot">
+                  Namaste! Welcome to *Digisoft Gift Shop*. 🙏
+                  
+                  I am your AI assistant. How can I help you pick the perfect crockery sets or design personalized gift combos today?
+                </div>
+              </div>
+              <div class="chat-input-bar">
+                <i class="fa-regular fa-face-smile"></i>
+                <i class="fa-solid fa-paperclip"></i>
+                <input type="text" id="chat-input" placeholder="Type message..." autocomplete="off">
+                <button id="send-chat-btn">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Mapping Section -->
+  <section class="proposal-section" style="background: rgba(255,255,255,0.01); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
+    <div class="section-container">
+      <span class="section-tag">System Design</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700; text-align: center;">Integrations & Infrastructure Map</h2>
+      <p style="color: var(--text-muted); margin-bottom: 4rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">Our tech stack connects the catalog, orders, logistics pipeline, and customer notifications together.</p>
+
+      <div class="arch-grid">
+        <div class="arch-card">
+          <div class="arch-card-icon"><i class="fa-solid fa-shop"></i></div>
+          <h4>Storefront Front-End</h4>
+          <ul>
+            <li>Vite & Vanilla JS</li>
+            <li>Dynamic Badging</li>
+            <li>Fragile labels</li>
+          </ul>
+        </div>
+
+        <div class="arch-pipelines">
+          <div class="pipeline">
+            <span class="pipeline-label">Sync Orders & Catalog</span>
+            <div class="flow-line">
+              <span class="pulse"></span>
+            </div>
+          </div>
+          <div class="pipeline">
+            <span class="pipeline-label">WhatsApp Notifications</span>
+            <div class="flow-line reverse">
+              <span class="pulse"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-card-icon"><i class="fa-solid fa-server"></i></div>
+          <h4>Firebase Database</h4>
+          <ul>
+            <li>Firestore Registry</li>
+            <li>Auth Verification</li>
+            <li>Real-time listeners</li>
+          </ul>
+        </div>
+
+        <div class="arch-pipelines">
+          <div class="pipeline">
+            <span class="pipeline-label">Checklist Validations</span>
+            <div class="flow-line">
+              <span class="pulse"></span>
+            </div>
+          </div>
+          <div class="pipeline">
+            <span class="pipeline-label">BlueDart Courier APIs</span>
+            <div class="flow-line reverse">
+              <span class="pulse"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="arch-card">
+          <div class="arch-card-icon"><i class="fa-solid fa-warehouse"></i></div>
+          <h4>Warehouse ERP</h4>
+          <ul>
+            <li>Invoice Engine</li>
+            <li>Safety Checklists</li>
+            <li>Status pipeline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Checklists Tabs -->
+  <section class="proposal-section" id="features">
+    <div class="section-container">
+      <span class="section-tag">Scope of Work</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 700; text-align: center;">Technical Feature Scope</h2>
+      <p style="color: var(--text-muted); margin-bottom: 3rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">Review the structural items bundled into this project split by system layers.</p>
+
+      <div class="checklist-tabs">
+        <button class="tab-btn active" id="tab-erp-btn">Storefront & ERP Dashboard</button>
+        <button class="tab-btn" id="tab-bot-btn">WhatsApp Commerce & AI Agent</button>
+      </div>
+
+      <div class="checklist-box">
+        <!-- ERP Content -->
+        <div class="checklist-tab-content active" id="content-erp">
+          <div class="checklist-grid">
+            <div class="checklist-col">
+              <h4>Storefront Portal UI</h4>
+              <ul class="styled-checklist">
+                <li><i class="fa-solid fa-circle-check"></i> Premium responsive storefront layout</li>
+                <li><i class="fa-solid fa-circle-check"></i> Advanced product filtering and category catalogs</li>
+                <li><i class="fa-solid fa-circle-check"></i> Smart badging (Best Seller, Fragile, New Arrival)</li>
+                <li><i class="fa-solid fa-circle-check"></i> Promotional discounts and coupon rule engine</li>
+              </ul>
+            </div>
+            <div class="checklist-col">
+              <h4>Operations ERP Panel</h4>
+              <ul class="styled-checklist">
+                <li><i class="fa-solid fa-circle-check"></i> Active Orders Queue with dispatch state toggles</li>
+                <li><i class="fa-solid fa-circle-check"></i> Automatic GST invoice calculator & print layouts</li>
+                <li><i class="fa-solid fa-circle-check"></i> Inventory Master Registry (SKU details, base prices)</li>
+                <li><i class="fa-solid fa-circle-check"></i> Low stock trigger thresholds & warning notifications</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp / Bot Content -->
+        <div class="checklist-tab-content" id="content-bot">
+          <div class="checklist-grid">
+            <div class="checklist-col">
+              <h4>WhatsApp API Channel</h4>
+              <ul class="styled-checklist">
+                <li><i class="fa-solid fa-circle-check"></i> Meta WhatsApp Cloud API credentials setup</li>
+                <li><i class="fa-solid fa-circle-check"></i> Automated alerts (Order confirmation, Dispatch, Delivery)</li>
+                <li><i class="fa-solid fa-circle-check"></i> PDF Doc Invoices push on shipment creation</li>
+                <li><i class="fa-solid fa-circle-check"></i> Abandoned Cart customer recovery alerts</li>
+              </ul>
+            </div>
+            <div class="checklist-col">
+              <h4>Sales AI Chatbot</h4>
+              <ul class="styled-checklist">
+                <li><i class="fa-solid fa-circle-check"></i> Gemini NLP models setup for customer intents</li>
+                <li><i class="fa-solid fa-circle-check"></i> Multilingual interaction in English & Hindi</li>
+                <li><i class="fa-solid fa-circle-check"></i> WhatsApp Native Checkout & checkout via text</li>
+                <li><i class="fa-solid fa-circle-check"></i> Lead pipeline logs & manual dashboard routing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project 15-Day Timeline Details -->
+  <section class="proposal-section section-timeline" id="timeline">
+    <div class="section-container">
+      <span class="section-tag">Implementation Roadmap</span>
+      <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;">15-Day Milestone Phases</h2>
+      <p style="color: var(--text-muted); margin-bottom: 3rem; max-width: 800px;">We follow a structured phase-by-phase implementation schedule to ensure zero downtime and smooth operations.</p>
+
+      <div class="timeline-container">
+        <div class="timeline-phases-nav">
+          <button class="phase-tab-btn active" data-phase="1">
+            <span class="phase-badge">Phase 1</span>
+            <span class="phase-title">Days 1–4: Foundation Setup</span>
+          </button>
+          <button class="phase-tab-btn" data-phase="2">
+            <span class="phase-badge">Phase 2</span>
+            <span class="phase-title">Days 5–8: Web Storefront</span>
+          </button>
+          <button class="phase-tab-btn" data-phase="3">
+            <span class="phase-badge">Phase 3</span>
+            <span class="phase-title">Days 9–12: WhatsApp & AI</span>
+          </button>
+          <button class="phase-tab-btn" data-phase="4">
+            <span class="phase-badge">Phase 4</span>
+            <span class="phase-title">Days 13–15: Launch Prep</span>
+          </button>
+        </div>
+
+        <div class="timeline-card">
+          <!-- Phase 1 Content -->
+          <div class="phase-content active" id="phase-1-content">
+            <div class="phase-summary-grid">
+              <div class="phase-info">
+                <h3>Architecture, UI Style System & Database</h3>
+                <p class="phase-desc">Setup and configuration of core frameworks, branding rules, database schemas, and admin ERP components.</p>
+                <div class="phase-highlights">
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-code"></i>
+                    <div>
+                      <h5>Firebase Integration</h5>
+                      <p>Active Real-time Firebase Firestore tables setup for catalog and order registry.</p>
+                    </div>
+                  </div>
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-palette"></i>
+                    <div>
+                      <h5>Responsive Design System</h5>
+                      <p>Sleek dark themes, gold overlays, glassmorphic containers, and premium fonts styling.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="days-list">
+                <div class="day-row">
+                  <span class="day-number">Day 1</span>
+                  <div class="day-details">
+                    <h4>Research & Feasibility Assessment</h4>
+                    <p>Competitor catalog study, workflow planning, design system guidelines document.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 2</span>
+                  <div class="day-details">
+                    <h4>UI / UX Branding Designs</h4>
+                    <p>Figma mockups creation, storefront templates styling, responsiveness breakpoints.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 3</span>
+                  <div class="day-details">
+                    <h4>Database Schema & ERP Dashboards</h4>
+                    <p>Firestore collections indexing, order updates listener, admin authentication setup.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 4</span>
+                  <div class="day-details">
+                    <h4>ERP Integrations</h4>
+                    <p>Warehouse safety validation workflow, stock count replacer algorithm implementation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 2 Content -->
+          <div class="phase-content" id="phase-2-content">
+            <div class="phase-summary-grid">
+              <div class="phase-info">
+                <h3>Storefront UI, Shopping Cart & Checkout Flow</h3>
+                <p class="phase-desc">Creating the primary storefront pages, sorting catalogs, coupon code validator logic, and payment modules integration.</p>
+                <div class="phase-highlights">
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <div>
+                      <h5>Checkout Rules</h5>
+                      <p>Smart subtotal calculator handling taxes, loyalty point credits, and checkout fields checks.</p>
+                    </div>
+                  </div>
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-tags"></i>
+                    <div>
+                      <h5>Dynamic Badging & Badges</h5>
+                      <p>Real-time badging on catalog items based on stock alerts, fragility, and promotional events.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="days-list">
+                <div class="day-row">
+                  <span class="day-number">Day 5</span>
+                  <div class="day-details">
+                    <h4>Storefront UI Completion</h4>
+                    <p>Homepage banners, product grid lists, categories navigation controls, details cards.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 6</span>
+                  <div class="day-details">
+                    <h4>Advanced Filters & Badging</h4>
+                    <p>Search indexing filters, category sorting options, Fragile and Low Stock stickers setup.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 7</span>
+                  <div class="day-details">
+                    <h4>Shopping Cart & Coupon Engines</h4>
+                    <p>Multi-item cart lists, coupon code apply trigger, discount calculations validation.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 8</span>
+                  <div class="day-details">
+                    <h4>Payment Gateway Integration</h4>
+                    <p>Sandbox setup for cards, UPI apps, netbanking, and wallets with invoice alerts trigger.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 3 Content -->
+          <div class="phase-content" id="phase-3-content">
+            <div class="phase-summary-grid">
+              <div class="phase-info">
+                <h3>WhatsApp Business APIs & Gemini NLP Bot</h3>
+                <p class="phase-desc">Setting up Meta Business accounts, automated updates triggers, and configuring the AI chatbot to catalog orders directly inside WhatsApp.</p>
+                <div class="phase-highlights">
+                  <div class="highlight-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div>
+                      <h5>Meta Cloud APIs</h5>
+                      <p>Verified WhatsApp Business profile hooks, transaction message templates approval.</p>
+                    </div>
+                  </div>
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-brain"></i>
+                    <div>
+                      <h5>AI Chatbot Engine</h5>
+                      <p>Gemini integration for answering product stock FAQs and qualifying customer details.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="days-list">
+                <div class="day-row">
+                  <span class="day-number">Day 9</span>
+                  <div class="day-details">
+                    <h4>WhatsApp API Config</h4>
+                    <p>Webhook configuration, order templates registration, trigger logic for dispatch updates.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 10</span>
+                  <div class="day-details">
+                    <h4>Multilingual Sales Bot</h4>
+                    <p>Gemini NLP prompts setup, bilingual translation layers, FAQ list indexing in Firestore.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 11</span>
+                  <div class="day-details">
+                    <h4>WhatsApp Native Checkout</h4>
+                    <p>Vite-whatsapp database listeners, text-based catalog browsing and order confirmations.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 12</span>
+                  <div class="day-details">
+                    <h4>Intelligent Lead Routing</h4>
+                    <p>Human operator dashboard redirect triggers, offline agent email notifications pipeline.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 4 Content -->
+          <div class="phase-content" id="phase-4-content">
+            <div class="phase-summary-grid">
+              <div class="phase-info">
+                <h3>Logistics, Speed Optimization & Testing</h3>
+                <p class="phase-desc">Courier airway bill integration, database caching setup, page audits, and overall bug fixing rounds.</p>
+                <div class="phase-highlights">
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                    <div>
+                      <h5>BlueDart Express APIs</h5>
+                      <p>Shipment creation webhook, instant tracking link calculations, invoice attachments.</p>
+                    </div>
+                  </div>
+                  <div class="highlight-item">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <div>
+                      <h5>Performance Auditing</h5>
+                      <p>Image compressions, SEO tags optimization, CDN delivery validation.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="days-list">
+                <div class="day-row">
+                  <span class="day-number">Day 13</span>
+                  <div class="day-details">
+                    <h4>Logistics Partner API Integrations</h4>
+                    <p>BlueDart Express API keys hook, fragile label tag prints, AWB routing setup.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 14</span>
+                  <div class="day-details">
+                    <h4>SEO & Page Optimization</h4>
+                    <p>Meta title tags, search schema configurations, image resizing, caching scripts.</p>
+                  </div>
+                </div>
+                <div class="day-row">
+                  <span class="day-number">Day 15</span>
+                  <div class="day-details">
+                    <h4>End-to-End Testing & Launch</h4>
+                    <p>Checkout simulations, Firestore stress load tests, admin dashboard login audit, deployment.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Details Section -->
+  <section class="proposal-section section-cta text-center" id="costing" style="background: radial-gradient(circle at 50% 120%, rgba(197, 160, 89, 0.1), transparent 50%); border-top: 1px solid var(--glass-border);">
+    <div class="section-container">
+      <span class="badge-accent">Commercial Quote & Costings</span>
+      <h2>Project Investment Budget</h2>
+      <p class="cta-subtitle" style="margin-bottom: 3rem;">A transparent pricing structure covering core development deliverables and standard operational API/hosting budgets.</p>
+
+      <div style="max-width: 900px; margin: 0 auto 3rem auto; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 20px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 1rem;">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--glass-border);">
+              <th style="padding: 18px 24px; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Scope Component</th>
+              <th style="padding: 18px 24px; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Details / Deliverables</th>
+              <th style="padding: 18px 24px; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; text-align: right;">Cost (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--glass-border);">
+              <td style="padding: 20px 24px; font-weight: 700;">Development Fee</td>
+              <td style="padding: 20px 24px; color: var(--text-muted); font-size: 0.9rem;">Storefront, Cart & checkout system, Admin ERP control panel, AI bot setup, BlueDart & Firebase integration.</td>
+              <td style="padding: 20px 24px; font-weight: 700; text-align: right; color: var(--primary);">₹1,80,000</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--glass-border); background: rgba(255,255,255,0.01);">
+              <td style="padding: 20px 24px; font-weight: 700;">Firebase Backend (Hosting/DB)</td>
+              <td style="padding: 20px 24px; color: var(--text-muted); font-size: 0.9rem;">Firebase spark plan (free for initial launch). Future pay-as-you-go based on active catalog visits.</td>
+              <td style="padding: 20px 24px; font-weight: 700; text-align: right; color: #25d366;">FREE Tier</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--glass-border);">
+              <td style="padding: 20px 24px; font-weight: 700;">WhatsApp API (Meta charges)</td>
+              <td style="padding: 20px 24px; color: var(--text-muted); font-size: 0.9rem;">User-initiated service chats are ~₹0.29; marketing template updates are ~₹0.70 per session. Paid directly to Meta.</td>
+              <td style="padding: 20px 24px; font-weight: 700; text-align: right; color: var(--text-main);">Pay-as-you-go</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--glass-border); background: rgba(255,255,255,0.01);">
+              <td style="padding: 20px 24px; font-weight: 700;">AI Prompt Tokens (Gemini API)</td>
+              <td style="padding: 20px 24px; color: var(--text-muted); font-size: 0.9rem;">Runs on Gemini 1.5 Flash API token counts. First 1,500 chats per month fit inside free developer keys.</td>
+              <td style="padding: 20px 24px; font-weight: 700; text-align: right; color: #25d366;">FREE (Tier 1)</td>
+            </tr>
+            <tr style="background: rgba(197, 160, 89, 0.05);">
+              <td style="padding: 20px 24px; font-weight: 800; color: var(--primary);">Total One-time Project cost</td>
+              <td style="padding: 20px 24px; font-weight: 600; font-size: 0.9rem;">Includes code handover, responsive testing adjustments, and initial server launch pipeline support.</td>
+              <td style="padding: 20px 24px; font-weight: 800; text-align: right; color: var(--primary); font-size: 1.25rem;">₹1,80,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="seo-card">
+        <i class="fa-solid fa-circle-check"></i>
+        <div>
+          <h4>Complete Maintenance & Hosting Assistance Included</h4>
+          <p>We supply 30 days of post-launch bug fixing support, basic SEO meta description indexing audits, and assistance linking your official corporate domain name to standard DNS settings.</p>
+        </div>
+      </div>
+
+      <div class="cta-actions">
+        <a href="/index.html" class="btn btn-primary btn-large">Accept Proposal</a>
+        <a href="/whatsapp.html" class="btn btn-outline btn-large">Try Simulator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="margin-top: 50px;">
+    <div class="footer-bottom">
+      <p>© 2026 Digisoft E-Commerce & ERP Systems. All rights reserved.</p>
+      <div class="dev-credit">
+        Designed for <span>Digisoft Gift Shop Website</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/proposal.js"></script>
+</body>
+
+</html>

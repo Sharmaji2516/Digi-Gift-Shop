@@ -15,7 +15,7 @@
 <body>
   <nav>
     <div class="logo">DIGISOFT</div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links-menu">
       <li><a href="#home">Home</a></li>
       <li><a href="#categories">Categories</a></li>
       <li><a href="#featured">Featured</a></li>
@@ -23,18 +23,48 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-icons">
-      <div class="search-trigger" id="search-btn">
-        <i class="fa-solid fa-magnifying-glass"></i>
+      <div class="search-trigger" id="search-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </div>
-      <i class="fa-solid fa-heart"></i>
-      <i class="fa-solid fa-bag-shopping"></i>
+      <div id="wishlist-trigger-btn" style="position: relative; cursor: pointer; display: flex; align-items: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span class="wishlist-badge-count" id="wishlist-count">0</span>
+      </div>
+      <div style="position: relative; display: inline-block; cursor: pointer; display: flex; align-items: center;">
+        <svg id="cart-trigger-btn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="cart-badge-count" id="cart-count">0</span>
+      </div>
+      <!-- Hamburger Menu for Mobile -->
+      <div id="menu-toggle-btn" style="cursor: pointer; display: none;">
+        <svg class="icon-bars" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
     </div>
   </nav>
 
   <!-- Search Overlay -->
   <div class="search-overlay" id="search-overlay">
     <div class="close-search" id="close-search">
-      <i class="fa-solid fa-xmark"></i>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
     </div>
     <div class="search-container">
       <input type="text" id="search-input" placeholder="Search for gifts, categories...">
@@ -72,30 +102,267 @@
         </div>
       </div>
       <div class="category-card">
-        <img src="/images/anniversary.png" alt="Anniversary Gifts">
+        <img src="/images/crockery_dinner_set.png" alt="Dinner Sets">
         <div class="category-overlay">
-          <h3>Anniversary Specials</h3>
-          <p>Celebrate your bond</p>
+          <h3>Dinner Sets</h3>
+          <p>Elegant designs for 6+ people</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <img src="/images/crockery_teapot.png" alt="Serveware">
+        <div class="category-overlay">
+          <h3>Serveware</h3>
+          <p>Luxury teapots and bowls</p>
         </div>
       </div>
       <div class="category-card">
         <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=2040&auto=format&fit=crop"
-          alt="Corporate Gifts">
+          alt="Combo Hampers">
         <div class="category-overlay">
-          <h3>Corporate Gifting</h3>
-          <p>Professional excellence</p>
+          <h3>Combo Hampers</h3>
+          <p>Premium gift boxes and pairings</p>
         </div>
       </div>
     </div>
   </section>
 
   <section class="section" id="featured" style="background: var(--bg-surface)">
+    <div class="breadcrumbs-container" style="max-width: 1200px; margin: 0 auto 20px auto; padding: 0 15px; font-size: 0.85rem; color: var(--text-muted); text-align: left;">
+      <a href="#home" style="transition: color 0.3s;">Home</a> &nbsp;/&nbsp; 
+      <a href="#categories" style="transition: color 0.3s;">Shop</a> &nbsp;/&nbsp; 
+      <span style="color: var(--primary); font-weight: 600;">Featured Treasures</span>
+    </div>
     <div class="section-header">
       <h2>Featured Treasures</h2>
       <div class="line"></div>
     </div>
+    <div style="max-width: 1200px; margin: 0 auto 2rem auto; padding: 0 15px;">
+      <div class="filter-controls-bar">
+        <div class="filter-select-group">
+          <label for="filter-department">Department</label>
+          <select id="filter-department" class="filter-select">
+            <option value="">All Departments</option>
+          </select>
+        </div>
+        <div class="filter-select-group">
+          <label for="filter-category">Category</label>
+          <select id="filter-category" class="filter-select" disabled>
+            <option value="">All Categories</option>
+          </select>
+        </div>
+        <div class="filter-select-group">
+          <label for="filter-subcategory">Sub Category</label>
+          <select id="filter-subcategory" class="filter-select" disabled>
+            <option value="">All Sub Categories</option>
+          </select>
+        </div>
+        <button id="reset-filters-btn" class="btn btn-outline" style="padding: 0.75rem 1.5rem; font-size: 0.85rem; border-radius: 8px;">Clear Filters</button>
+      </div>
+    </div>
     <div class="product-grid" id="product-container">
-      <!-- Products will be injected by JavaScript -->
+      <!-- Loading Skeletons -->
+      <div class="product-card skeleton-card">
+        <div class="product-img skeleton skeleton-img"></div>
+        <div class="product-info">
+          <div class="skeleton skeleton-text" style="width: 40%; height: 12px; margin-bottom: 8px;"></div>
+          <div class="skeleton skeleton-text" style="width: 80%; height: 18px; margin-bottom: 12px;"></div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="flex-grow: 1;">
+              <div class="skeleton skeleton-text" style="width: 50%; height: 16px; margin-bottom: 4px;"></div>
+              <div class="skeleton skeleton-text" style="width: 30%; height: 10px;"></div>
+            </div>
+            <div class="skeleton skeleton-btn" style="width: 40px; height: 40px; border-radius: 50%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card skeleton-card">
+        <div class="product-img skeleton skeleton-img"></div>
+        <div class="product-info">
+          <div class="skeleton skeleton-text" style="width: 45%; height: 12px; margin-bottom: 8px;"></div>
+          <div class="skeleton skeleton-text" style="width: 75%; height: 18px; margin-bottom: 12px;"></div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="flex-grow: 1;">
+              <div class="skeleton skeleton-text" style="width: 55%; height: 16px; margin-bottom: 4px;"></div>
+              <div class="skeleton skeleton-text" style="width: 25%; height: 10px;"></div>
+            </div>
+            <div class="skeleton skeleton-btn" style="width: 40px; height: 40px; border-radius: 50%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card skeleton-card">
+        <div class="product-img skeleton skeleton-img"></div>
+        <div class="product-info">
+          <div class="skeleton skeleton-text" style="width: 35%; height: 12px; margin-bottom: 8px;"></div>
+          <div class="skeleton skeleton-text" style="width: 85%; height: 18px; margin-bottom: 12px;"></div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="flex-grow: 1;">
+              <div class="skeleton skeleton-text" style="width: 40%; height: 16px; margin-bottom: 4px;"></div>
+              <div class="skeleton skeleton-text" style="width: 35%; height: 10px;"></div>
+            </div>
+            <div class="skeleton skeleton-btn" style="width: 40px; height: 40px; border-radius: 50%;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="product-card skeleton-card">
+        <div class="product-img skeleton skeleton-img"></div>
+        <div class="product-info">
+          <div class="skeleton skeleton-text" style="width: 50%; height: 12px; margin-bottom: 8px;"></div>
+          <div class="skeleton skeleton-text" style="width: 70%; height: 18px; margin-bottom: 12px;"></div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="flex-grow: 1;">
+              <div class="skeleton skeleton-text" style="width: 60%; height: 16px; margin-bottom: 4px;"></div>
+              <div class="skeleton skeleton-text" style="width: 20%; height: 10px;"></div>
+            </div>
+            <div class="skeleton skeleton-btn" style="width: 40px; height: 40px; border-radius: 50%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="about-container">
+      <div class="about-info">
+        <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+          <h2>Our Story</h2>
+          <div class="line" style="margin: 0;"></div>
+        </div>
+        <h3>Crafting Memories, Delivering Joy</h3>
+        <p>At Digisoft Gift Shop, we believe that a gift is more than just an object—it is a tangible expression of love, appreciation, and connection. Established with a passion for premium craftsmanship, we curate an exclusive collection of luxury and bespoke treasures designed to elevate life's special milestones.</p>
+        <p>Whether you are celebrating a silver anniversary, thanking a corporate partner, or creating custom-engraved keepsakes, our goal remains the same: to provide premium, elegant, and heartfelt creations that leave an everlasting impression.</p>
+      </div>
+      <div class="about-pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3h12l4 6-10 13L2 9z"></path>
+              <path d="M11 3 8 9l4 13 4-13-3-6"></path>
+              <path d="M2 9h20"></path>
+            </svg>
+          </div>
+          <h4>Premium Curation</h4>
+          <p>Handpicked luxury items sourced from master artisans globally.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 4 5 5"></path>
+              <path d="m3 20 12-12"></path>
+              <path d="m19 3-1 1"></path>
+              <path d="m20 2-2 2"></path>
+              <path d="M13 2v2"></path>
+              <path d="M9 3H7"></path>
+            </svg>
+          </div>
+          <h4>Bespoke Customization</h4>
+          <p>Personalized engraving and custom designs tailored to your vision.</p>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <h4>Worldwide Shipping</h4>
+          <p>Secure, premium packaging with reliable global delivery services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="background: var(--bg-surface)">
+    <div class="section-header">
+      <h2>Get in Touch</h2>
+      <div class="line"></div>
+    </div>
+    <div class="contact-container">
+      <div class="contact-details">
+        <h3>We'd Love to Hear From You</h3>
+        <p>Have questions about customizations, bulk corporate orders, or delivery? Reach out to our customer care team. We are here to assist you.</p>
+        
+        <div class="contact-info-list">
+          <div class="contact-info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Our Gallery</h4>
+              <p>101, Luxury Boulevard, Suite A, New York, NY 10001</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Call Us</h4>
+              <p>+1 (555) 123-4567</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Email Support</h4>
+              <p>support@digisoftgiftshop.com</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="info-text">
+              <h4>Hours of Operation</h4>
+              <p>Mon - Sat: 9:00 AM - 8:00 PM <br>Sunday: Closed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="contact-name" required placeholder=" ">
+              <label for="contact-name">Your Full Name</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="contact-email" required placeholder=" ">
+              <label for="contact-email">Email Address</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" id="contact-subject" required placeholder=" ">
+            <label for="contact-subject">Subject</label>
+          </div>
+          <div class="form-group">
+            <textarea id="contact-message" rows="5" required placeholder=" "></textarea>
+            <label for="contact-message">Your Message</label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            <span>Send Message</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px; display: inline-block; vertical-align: middle;">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -105,10 +372,30 @@
         <div class="logo" style="margin-bottom: 20px;">DIGISOFT</div>
         <p style="color: var(--text-muted)">The world's premier destination for luxury gifting and personalized experiences. Crafting memories that last a lifetime.</p>
         <div class="social-links">
-          <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
         </div>
       </div>
       <div class="footer-col">
@@ -148,7 +435,271 @@
     </div>
   </footer>
 
+  <!-- Floating Chatbot Widget -->
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-widget-trigger" id="chat-trigger" style="display: flex; align-items: center; justify-content: center; cursor: pointer;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span class="chat-badge">AI Online</span>
+    </div>
+    <div class="chat-window" id="chat-window">
+      <div class="chat-window-header">
+        <div class="header-info">
+          <div class="avatar" style="display: flex; align-items: center; justify-content: center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <h4>Digisoft Assistant</h4>
+            <span>Ask about stock, safety, or order tracking</span>
+          </div>
+        </div>
+        <div class="close-chat" id="close-chat-widget" style="cursor: pointer; display: flex; align-items: center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+      </div>
+      <div class="chat-window-body" id="chat-widget-messages">
+        <div class="chat-msg bot">
+          Hello! 🌸 I am your Digisoft Sales & Support assistant. 
+          How can I help you today?
+        </div>
+      </div>
+      <div class="chat-window-footer">
+        <input type="text" id="chat-widget-input" placeholder="Type message..." autocomplete="off">
+        <button id="chat-widget-send" style="display: flex; align-items: center; justify-content: center; cursor: pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Gift Cart</h3>
+      <div class="close-cart" id="close-cart-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+    </div>
+    <div class="cart-body" id="cart-body-items">
+      <!-- Dynamic cart rows will go here -->
+    </div>
+    <div class="cart-footer">
+      <div class="price-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+      <div class="price-row"><span>GST (18%)</span><span id="cart-tax">$0.00</span></div>
+      <div class="price-row total"><span>Total Amount</span><span id="cart-total">$0.00</span></div>
+      <button class="btn btn-primary btn-block" id="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Wishlist Drawer -->
+  <div class="cart-drawer" id="wishlist-drawer">
+    <div class="cart-header">
+      <h3>Your Gift Wishlist</h3>
+      <div class="close-cart" id="close-wishlist-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+    </div>
+    <div class="cart-body" id="wishlist-body-items">
+      <!-- Dynamic wishlist rows will go here -->
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="checkout-overlay" id="checkout-overlay">
+    <div class="checkout-modal">
+      <div class="close-checkout" id="close-checkout-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+      <h2>Order Checkout</h2>
+      <form id="checkout-form-modal">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <input type="text" id="cust-name" required placeholder=" ">
+          <label for="cust-name">Full Name</label>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <input type="email" id="cust-email" required placeholder=" ">
+          <label for="cust-email">Email Address</label>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <input type="tel" id="cust-phone" required placeholder=" ">
+          <label for="cust-phone">WhatsApp Number</label>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <input type="text" id="cust-address" required placeholder=" ">
+          <label for="cust-address">Delivery Address</label>
+        </div>
+        <div class="payment-group" style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1rem; font-weight:600; margin-bottom: 0.8rem; color:var(--primary);">Payment Mode</h4>
+          <div class="payment-cards" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <!-- Hidden original inputs for form submission -->
+            <input type="radio" name="payment-mode" id="pay-mode-cod" value="COD" checked style="display:none;">
+            <input type="radio" name="payment-mode" id="pay-mode-online" value="ONLINE" style="display:none;">
+            
+            <div class="payment-card active" id="pay-card-cod" style="border: 2px solid var(--primary); background: rgba(197, 160, 89, 0.05); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 10px rgba(197, 160, 89, 0.1);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 6px;">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M6 12h.01M18 12h.01"></path>
+              </svg>
+              <h5 style="margin: 0; color: var(--text-main); font-size: 0.85rem; font-weight: 600;">Cash on Delivery</h5>
+              <p style="margin: 3px 0 0 0; font-size: 0.7rem; color: var(--text-muted);">Pay upon delivery</p>
+            </div>
+            
+            <div class="payment-card" id="pay-card-online" style="border: 2px solid var(--glass-border); background: var(--glass); padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 6px;" class="card-stroke-icon">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+              <h5 style="margin: 0; color: var(--text-main); font-size: 0.85rem; font-weight: 600;">Prepaid Online</h5>
+              <p style="margin: 3px 0 0 0; font-size: 0.7rem; color: var(--text-muted);">Card / UPI / NetBanking</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Coupon Code Field -->
+        <div class="discount-group" style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 1.0rem; font-weight:600; margin-bottom: 0.8rem; color:var(--primary);">Coupon Code</h4>
+          <div style="display:flex; gap:10px;">
+            <input type="text" id="coupon-code-input" placeholder="Enter coupon (e.g. WELCOME10)" style="flex-grow:1; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none; text-transform:uppercase;">
+            <button type="button" class="btn btn-outline" id="apply-coupon-btn" style="padding: 10px 15px; border-radius: 8px;">Apply</button>
+          </div>
+          <span id="coupon-message" style="font-size:0.8rem; display:block; margin-top:5px; font-weight:600;"></span>
+        </div>
+        
+        <!-- Loyalty Rewards Points Block -->
+        <div class="loyalty-group" id="loyalty-redeem-container" style="margin-bottom: 1.5rem; display:none;">
+          <h4 style="font-size: 1.0rem; font-weight:600; margin-bottom: 0.8rem; color:var(--primary);">Loyalty Rewards</h4>
+          <div style="background:var(--bg-surface); border:1px solid var(--glass-border); padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <p style="font-size:0.85rem; margin:0; color:var(--text-main);">Available Points: <b id="loyalty-points-balance" style="color:var(--primary);">0</b></p>
+              <p style="font-size:0.75rem; margin:0; color:var(--text-muted);">1 Point = ₹1 Discount</p>
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:0.85rem; font-weight:600; color:var(--text-main);">
+              <input type="checkbox" id="redeem-points-checkbox">
+              <span>Redeem Points</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Live Order Summary inside Checkout Modal -->
+        <div class="checkout-summary-box" style="margin-top: 1.5rem; margin-bottom: 1.5rem; background: var(--bg-surface); border: 1px solid var(--glass-border); padding: 1.2rem; border-radius: 12px; font-size: 0.9rem;">
+          <h4 style="font-size: 1.0rem; font-weight: 600; margin-bottom: 0.8rem; color: var(--primary); border-bottom: 1px dashed var(--glass-border); padding-bottom: 5px; margin-top: 0;">Order Summary</h4>
+          <div id="checkout-summary-items" style="max-height: 120px; overflow-y: auto; margin-bottom: 10px; font-size: 0.82rem; color: var(--text-muted);">
+            <!-- Dynamic items list -->
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; justify-content:space-between;"><span>Subtotal:</span> <span id="checkout-subtotal">₹0.00</span></div>
+            <div id="checkout-discount-row" style="display:none; justify-content:space-between; color: var(--primary);"><span>Coupon Discount:</span> <span id="checkout-discount">-₹0.00</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>GST (18%):</span> <span id="checkout-tax">₹0.00</span></div>
+            <div id="checkout-loyalty-row" style="display:none; justify-content:space-between; color: #38a169;"><span>Points Redeemed:</span> <span id="checkout-loyalty-discount">-₹0.00</span></div>
+            <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--text-main); font-size:1.05rem; border-top:1px solid var(--glass-border); padding-top:8px; margin-top:4px;">
+              <span>Grand Total:</span> <span id="checkout-grand-total">₹0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem; width:100%; display:flex; justify-content:center; align-items:center;">Confirm & Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Simulated Razorpay Payment Modal -->
+  <div class="checkout-overlay" id="razorpay-sim-overlay">
+    <div class="checkout-modal" style="width: 420px; max-width: 90vw; border-top: 5px solid var(--primary); text-align: center; padding: 2.5rem 2rem; border-radius: 20px;">
+      <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h3 style="margin-bottom: 5px; color: var(--text-main);">Razorpay Secured Payment</h3>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">[TEST MODE SIMULATION]</p>
+      
+      <div style="background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.2rem; margin-bottom: 25px; text-align: left; font-size: 0.9rem; color: var(--text-main);">
+        <p style="margin-bottom: 5px;"><b>Merchant:</b> Digisoft Gift Shop</p>
+        <p style="margin-bottom: 5px;"><b>Order ID:</b> <span id="razorpay-sim-order-id">OD-XXXXXX</span></p>
+        <p><b>Amount:</b> <span id="razorpay-sim-amount" style="color: var(--primary); font-weight: 700;">₹0.00</span></p>
+      </div>
+      
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button class="btn btn-primary" id="razorpay-sim-success-btn" style="width: 100%; justify-content: center; display: flex; align-items: center; cursor: pointer;">
+          Simulate Successful Payment
+        </button>
+        <button class="btn btn-outline" id="razorpay-sim-fail-btn" style="width: 100%; justify-content: center; display: flex; align-items: center; border-color: #ff4a4a; color: #ff4a4a; cursor: pointer;">
+          Simulate Payment Failure
+        </button>
+        <button class="btn btn-outline" id="razorpay-sim-cancel-btn" style="width: 100%; justify-content: center; display: flex; align-items: center; margin-top: 5px; cursor: pointer;">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Success Receipt Modal -->
+  <div class="checkout-overlay" id="order-success-overlay">
+    <div class="checkout-modal success-modal" style="width: 580px; max-width: 95vw;">
+      <div class="close-checkout" id="close-success-modal-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+      
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: center; margin-bottom: 10px;">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <h2 style="margin-bottom: 5px; color: var(--text-main);">Order Placed Successfully!</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Your TAX invoice has been generated below.</p>
+      </div>
+
+      <div id="success-invoice-content" style="background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem; max-height: 280px; overflow-y: auto; color: var(--text-main);">
+        <!-- Injected dynamically -->
+      </div>
+
+      <div style="display: flex; gap: 1rem;">
+        <button class="btn btn-outline" id="print-success-invoice-btn" style="flex: 1; justify-content: center; display: flex; gap: 8px; align-items: center; cursor:pointer;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg> Print Invoice
+        </button>
+        <button class="btn btn-primary" id="continue-shopping-btn" style="flex: 1; justify-content: center; display: flex; gap: 8px; align-items: center; cursor:pointer;">
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script type="module" src="/src/main.js"></script>
+  <!-- Success Notification Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+  
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:99999;"></canvas>
 </body>
 
 </html>

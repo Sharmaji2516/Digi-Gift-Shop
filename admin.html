@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ERP Operations Control Dashboard | Digisoft</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/admin.css">
+</head>
+
+<body class="erp-page">
+  <!-- Premium Login / Signup Screen -->
+  <div class="auth-container active" id="auth-panel">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">DIGISOFT <span class="badge">ERP SYSTEM</span></div>
+        <h2 id="auth-title">Welcome Back</h2>
+        <p id="auth-subtitle">Please enter your credentials to access operations.</p>
+      </div>
+      
+      <!-- Login Panel -->
+      <form id="login-form" class="auth-form active">
+        <div class="form-group">
+          <label>Email Address</label>
+          <div class="input-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <input type="email" id="login-email" required placeholder="admin@digisoft.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <input type="password" id="login-password" required placeholder="••••••••">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        <p class="auth-toggle-text" style="font-size: 0.8rem; opacity: 0.8; margin-top: 15px;">Please contact your developer for creating your admin account.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Nav Bar -->
+  <nav class="erp-nav">
+    <div class="logo">DIGISOFT <span class="badge">ERP SYSTEM</span></div>
+    <ul class="nav-links">
+      <li><a href="/index.html" style="display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>Back to Store</a></li>
+      <li><a href="#" id="admin-logout-btn" style="color: #ff4a4a; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>Logout</a></li>
+    </ul>
+    <div class="nav-icons">
+      <div class="db-status"><span class="status-indicator online"></span> ERP Pipeline Active</div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Overview Metrics -->
+  <header class="erp-dashboard-header">
+    <div class="section-container">
+      <div class="section-tag" id="welcome-user-tag">Internal Database Portal</div>
+      <h2>Warehouse Operations & Inventory Control</h2>
+      <div class="erp-metrics-grid">
+        <div class="metric-card">
+          <span class="card-title">Total Sales Revenue</span>
+          <h3 id="metric-revenue">₹0.00</h3>
+          <p style="color: #25D366; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+            Live ERP calculations
+          </p>
+        </div>
+        <div class="metric-card">
+          <span class="card-title">Processed Orders</span>
+          <h3 id="metric-orders">0</h3>
+          <p style="color: var(--text-muted); font-size: 0.8rem;">Ready for dispatch</p>
+        </div>
+        <div class="metric-card font-danger">
+          <span class="card-title">Low Stock Warnings</span>
+          <h3 id="metric-lowstock" class="low-stock-count">0</h3>
+          <p style="color: #ff4a4a; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Below 5 items
+          </p>
+        </div>
+        <div class="metric-card">
+          <span class="card-title">Average Gross Margin</span>
+          <h3>64.8%</h3>
+          <p style="color: var(--text-muted); font-size: 0.8rem;">Gifts & Crockery avg.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid Controls -->
+  <main class="erp-main-section">
+    <div class="section-container">
+      <div class="erp-tabs">
+        <button class="tab-btn active" id="tab-orders-btn" style="display: flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path>
+            <path d="M14 14.5a2.5 2.5 0 0 0-5 0v1a2.5 2.5 0 0 0 5 0v-1Z"></path>
+            <path d="M12 8V6"></path>
+            <path d="M12 18v1"></path>
+          </svg>
+          Orders Queue (<span id="orders-count-badge">0</span>)
+        </button>
+        <button class="tab-btn" id="tab-inventory-btn" style="display: flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m22 8-6 4-6-4-6 4-2-1.33v6.66l2 1.33 6-4 6 4 6-4z"></path>
+            <path d="m22 4-10-5-10 5 10 5z"></path>
+            <path d="M2 14.67v6l10 5 10-5v-6"></path>
+          </svg>
+          Inventory Registry
+        </button>
+      </div>
+
+      <!-- Content Window -->
+      <div class="erp-content-box">
+        
+        <!-- Orders Management Panel -->
+        <div class="erp-tab-content active" id="erp-orders-panel">
+          <div class="panel-header">
+            <h3>Pending Orders Dispatch Queue</h3>
+          </div>
+          
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:15px; margin-bottom:25px; flex-wrap:wrap;">
+            <div style="position:relative; width:300px;">
+              <svg style="position:absolute; left:12px; top:12px; color:var(--text-muted);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="order-search-input" placeholder="Search by name, ID, or status..." style="padding-left:40px !important;">
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;" id="order-status-filters">
+              <button class="btn btn-outline filter-status-btn active" data-filter="All" style="padding:6px 12px; font-size:0.85rem;">All</button>
+              <button class="btn btn-outline filter-status-btn" data-filter="Active" style="padding:6px 12px; font-size:0.85rem;">Active Queue</button>
+              <button class="btn btn-outline filter-status-btn" data-filter="Delivered" style="padding:6px 12px; font-size:0.85rem;">Delivered (History)</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="erp-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer Name</th>
+                  <th>WhatsApp Number</th>
+                  <th>Date & Time</th>
+                  <th>Amount</th>
+                  <th>Payment</th>
+                  <th>Courier Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Inventory Registry Panel -->
+        <div class="erp-tab-content" id="erp-inventory-panel">
+          <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+            <div>
+              <h3>Inventory Item Master List</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Edit pricing, replenish stock levels, or adjust tagging configuration values.</p>
+            </div>
+            <button class="btn btn-primary" id="add-combo-btn" style="display: flex; align-items: center; gap: 6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
+              Create Combo Hamper
+            </button>
+          </div>
+          <div class="table-responsive">
+            <table class="erp-table">
+              <thead>
+                <tr>
+                  <th>SKU ID</th>
+                  <th>Thumbnail</th>
+                  <th>Product Name</th>
+                  <th>Department</th>
+                  <th>Category</th>
+                  <th>Sub Category</th>
+                  <th>Base Price</th>
+                  <th>Stock Count</th>
+                  <th>Safety Tags</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-table-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Stock Modal popup -->
+  <div class="erp-modal-overlay" id="edit-stock-modal">
+    <div class="erp-modal">
+      <div class="close-modal" id="close-stock-modal-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+      <h3>Modify SKU Master Data</h3>
+      <form id="edit-stock-form" style="margin-top: 1.5rem;">
+        <input type="hidden" id="edit-sku-id">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Product Name</label>
+          <input type="text" id="edit-sku-name" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Image URL</label>
+          <input type="text" id="edit-sku-image" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+        </div>
+        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin-bottom: 1.5rem;">
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Department</label>
+            <select id="edit-sku-department" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Category</label>
+            <select id="edit-sku-category" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Sub Category</label>
+            <select id="edit-sku-subcategory" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+            </select>
+          </div>
+        </div>
+        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom: 1.5rem;">
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Price (₹)</label>
+            <input type="number" id="edit-sku-price" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+          </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Stock Level</label>
+            <input type="number" id="edit-sku-stock" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 2rem;">
+          <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 10px;">Security & Fragile Flags</label>
+          <div style="display:flex; gap:20px;">
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="edit-sku-fragile">
+              <span>Fragile Item Tag</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="edit-sku-microwave">
+              <span>Microwave Safe</span>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Apply Master Update</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Combo Modal popup -->
+  <div class="erp-modal-overlay" id="add-combo-modal">
+    <div class="erp-modal">
+      <div class="close-modal" id="close-combo-modal-btn" style="cursor: pointer; display: flex; align-items: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </div>
+      <h3>Create Gift Bundle / Combo hamper</h3>
+      <form id="add-combo-form" style="margin-top: 1.5rem;">
+        <div class="form-group" style="margin-bottom: 1.2rem;">
+          <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Combo Name</label>
+          <input type="text" id="combo-name" placeholder="e.g. Luxury High-Tea hamper" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+        </div>
+        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin-bottom: 1.2rem;">
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Department</label>
+            <select id="combo-department" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Category</label>
+            <select id="combo-category" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Sub Category</label>
+            <select id="combo-subcategory" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+            </select>
+          </div>
+        </div>
+        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom: 1.2rem;">
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Package Price (₹)</label>
+            <input type="number" id="combo-price" placeholder="e.g. 2999" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+          </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Available Quantity</label>
+            <input type="number" id="combo-stock" placeholder="e.g. 10" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 2rem;">
+          <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Visual Image URL</label>
+          <input type="text" id="combo-image" placeholder="https://images.unsplash.com/..." required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register Bundle SKU</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Invoices GST print popup window modal -->
+  <div class="invoice-modal-overlay" id="invoice-modal">
+    <div class="invoice-wrap">
+      <div class="invoice-print-actions">
+        <button class="btn btn-outline" id="close-invoice-modal" style="display: flex; align-items: center; gap: 4px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Close
+        </button>
+        <button class="btn btn-primary" onclick="window.print()" style="display: flex; align-items: center; gap: 4px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print Invoice (PDF)
+        </button>
+      </div>
+      
+      <!-- Actual printable area -->
+      <div class="invoice-container-print" id="invoice-print-area">
+        <!-- Renders dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+
+</html>
