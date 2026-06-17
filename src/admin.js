@@ -17,6 +17,7 @@ let products = [];
 let orders = [];
 let currentOrderFilter = "All";
 let currentOrderSearch = "";
+let currentEditingReviews = [];
 
 const erpHierarchy = {
   "Crockery & Dining": {
@@ -296,6 +297,40 @@ const initERP = () => {
     invoiceModal.classList.remove('active');
   });
 
+  // Add manual review click listener
+  const addReviewBtn = document.getElementById('add-review-manual-btn');
+  if (addReviewBtn) {
+    addReviewBtn.addEventListener('click', () => {
+      const name = document.getElementById('new-review-name').value.trim();
+      const rating = parseInt(document.getElementById('new-review-rating').value);
+      const comment = document.getElementById('new-review-comment').value.trim();
+
+      if (!name) {
+        alert("Please enter a reviewer name.");
+        return;
+      }
+      if (!comment) {
+        alert("Please enter a comment.");
+        return;
+      }
+
+      const newReview = {
+        id: "rev_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+        reviewerName: name,
+        rating: rating,
+        comment: comment,
+        timestamp: new Date().toISOString()
+      };
+
+      currentEditingReviews.push(newReview);
+      renderEditingReviews();
+
+      // Reset fields
+      document.getElementById('new-review-name').value = '';
+      document.getElementById('new-review-comment').value = '';
+    });
+  }
+
   // Handle SKU update submit
   document.getElementById('edit-stock-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -309,6 +344,16 @@ const initERP = () => {
     const department = document.getElementById('edit-sku-department').value;
     const category = document.getElementById('edit-sku-category').value;
     const subCategory = document.getElementById('edit-sku-subcategory').value;
+    const description = document.getElementById('edit-sku-description').value;
+    const soldCount = parseInt(document.getElementById('edit-sku-sold-count').value) || 0;
+
+    // Calculate rating and reviewCount
+    const reviewCount = currentEditingReviews.length;
+    let rating = 0;
+    if (reviewCount > 0) {
+      const sum = currentEditingReviews.reduce((s, r) => s + r.rating, 0);
+      rating = Math.round((sum / reviewCount) * 10) / 10;
+    }
 
     try {
       await updateDoc(doc(db, 'products', id.toString()), {
@@ -320,7 +365,12 @@ const initERP = () => {
         microwave,
         department,
         category,
-        subCategory
+        subCategory,
+        description,
+        soldCount,
+        reviews: currentEditingReviews,
+        rating,
+        reviewCount
       });
       showToast("SKU Updated", `Product "${name}" details updated successfully.`, "success");
       stockModal.classList.remove('active');
@@ -493,6 +543,11 @@ const renderInventoryTable = () => {
         document.getElementById('edit-sku-stock').value = product.stock;
         document.getElementById('edit-sku-fragile').checked = product.fragile;
         document.getElementById('edit-sku-microwave').checked = product.microwave;
+        document.getElementById('edit-sku-description').value = product.description || '';
+        document.getElementById('edit-sku-sold-count').value = product.soldCount || 0;
+
+        currentEditingReviews = product.reviews ? [...product.reviews] : [];
+        renderEditingReviews();
 
         const deptSelect = document.getElementById('edit-sku-department');
         const catSelect = document.getElementById('edit-sku-category');
@@ -842,3 +897,43 @@ const openInvoiceModal = (orderId) => {
 
   document.getElementById('invoice-modal').classList.add('active');
 };
+
+const renderEditingReviews = () => {
+  const container = document.getElementById('edit-sku-reviews-container');
+  if (!container) return;
+
+  if (currentEditingReviews.length === 0) {
+    container.innerHTML = `<p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin:10px 0;">No reviews registered for this product.</p>`;
+    return;
+  }
+
+  container.innerHTML = currentEditingReviews.map((rev, idx) => {
+    const stars = "★".repeat(rev.rating) + "☆".repeat(5 - rev.rating);
+    const dateStr = rev.timestamp ? new Date(rev.timestamp).toLocaleDateString('en-IN') : 'N/A';
+    return `
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px dashed var(--glass-border); padding:8px 0; font-size:0.8rem;">
+        <div style="flex-grow:1; padding-right:10px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+            <span style="font-weight:700; color:var(--text-main);">${rev.reviewerName}</span>
+            <span style="color:var(--primary); font-weight:600;">${stars}</span>
+          </div>
+          <p style="margin:0; color:var(--text-muted); font-size:0.75rem; line-height:1.3;">${rev.comment}</p>
+          <span style="font-size:0.65rem; color:rgba(255,255,255,0.3);">${dateStr}</span>
+        </div>
+        <button type="button" class="btn-delete-review" data-idx="${idx}" style="background:none; border:none; color:#ff4a4a; cursor:pointer; font-weight:bold; font-size:0.9rem; padding: 2px 6px;">
+          &times;
+        </button>
+      </div>
+    `;
+  }).join('');
+
+  // Bind delete buttons
+  container.querySelectorAll('.btn-delete-review').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.getAttribute('data-idx'));
+      currentEditingReviews.splice(idx, 1);
+      renderEditingReviews();
+    });
+  });
+};
+

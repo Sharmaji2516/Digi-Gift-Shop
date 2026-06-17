@@ -230,6 +230,12 @@ onSnapshot(collection(db, 'products'), (snapshot) => {
   products.sort((a, b) => a.id - b.id);
   renderProducts();
   injectJSONLD(products);
+  if (currentDetailProductId) {
+    const updatedProduct = products.find(p => p.id === currentDetailProductId);
+    if (updatedProduct) {
+      renderDetailModalContent(updatedProduct);
+    }
+  }
 }, (err) => {
   showFirebaseError(err);
 });
@@ -246,6 +252,379 @@ const getProducts = () => products;
 const getOrders = () => orders;
 
 // Render Products
+let currentDetailProductId = null;
+
+const renderDetailModalContent = (product) => {
+  const imgEl = document.getElementById('detail-product-image');
+  const catEl = document.getElementById('detail-product-category');
+  const nameEl = document.getElementById('detail-product-name');
+  const priceEl = document.getElementById('detail-product-price');
+  const mrpEl = document.getElementById('detail-product-mrp');
+  const discountEl = document.getElementById('detail-product-discount');
+  const descEl = document.getElementById('detail-product-description');
+  const soldEl = document.getElementById('detail-product-sold-badge');
+  const starsAvgEl = document.getElementById('detail-product-stars-avg');
+  const ratingTextEl = document.getElementById('detail-product-rating-text');
+  const stockEl = document.getElementById('detail-product-stock-badge');
+  const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
+  const wishlistBtn = document.getElementById('detail-wishlist-btn');
+
+  if (imgEl) {
+    imgEl.src = product.image;
+    imgEl.alt = product.name;
+  }
+  if (catEl) {
+    catEl.textContent = (product.department ? product.department + ' > ' : '') + (product.category || 'Gifts');
+  }
+  if (nameEl) {
+    nameEl.textContent = product.name;
+  }
+  if (priceEl) {
+    priceEl.textContent = '₹' + product.price.toLocaleString('en-IN');
+  }
+  
+  if (mrpEl && discountEl) {
+    // Generate a comparative MRP (roughly 1.4x the price, rounded to end in 9 or 0)
+    const fakeMRP = Math.round((product.price * 1.4) / 10) * 10 - 1;
+    const discountPercent = Math.round(((fakeMRP - product.price) / fakeMRP) * 100);
+    mrpEl.textContent = '₹' + fakeMRP.toLocaleString('en-IN');
+    discountEl.textContent = `(${discountPercent}% OFF)`;
+  }
+
+  if (descEl) {
+    descEl.textContent = product.description || 'No description available.';
+  }
+  if (soldEl) {
+    soldEl.textContent = `${product.soldCount || 0}+ sold`;
+  }
+
+  const avgRating = product.rating || 0;
+  if (starsAvgEl) {
+    starsAvgEl.textContent = avgRating > 0 ? avgRating.toFixed(1) : '0.0';
+  }
+  if (ratingTextEl) {
+    ratingTextEl.textContent = `(${product.reviewCount || 0} customer reviews)`;
+  }
+
+  if (stockEl) {
+    if (product.stock > 0) {
+      stockEl.textContent = 'In Stock';
+      stockEl.style.background = 'rgba(37, 211, 102, 0.08)';
+      stockEl.style.color = '#25D366';
+      stockEl.style.border = '1px solid rgba(37, 211, 102, 0.15)';
+    } else {
+      stockEl.textContent = 'Out of Stock';
+      stockEl.style.background = 'rgba(255, 74, 74, 0.08)';
+      stockEl.style.color = '#ff4a4a';
+      stockEl.style.border = '1px solid rgba(255, 74, 74, 0.15)';
+    }
+  }
+
+  if (addToCartBtn) {
+    if (product.stock <= 0) {
+      addToCartBtn.style.opacity = '0.5';
+      addToCartBtn.style.pointerEvents = 'none';
+      addToCartBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg> Out of Stock
+      `;
+    } else {
+      addToCartBtn.style.opacity = '1';
+      addToCartBtn.style.pointerEvents = 'auto';
+      addToCartBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg> Add to Cart
+      `;
+    }
+  }
+
+  if (wishlistBtn) {
+    const isWishlisted = wishlist.some(item => item.id === product.id);
+    wishlistBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="${isWishlisted ? 'var(--primary)' : 'none'}" stroke="${isWishlisted ? 'var(--primary)' : 'currentColor'}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    `;
+  }
+
+  // Render review list
+  const reviewsContainer = document.getElementById('detail-reviews-list-container');
+  if (reviewsContainer) {
+    if (!product.reviews || product.reviews.length === 0) {
+      reviewsContainer.innerHTML = `<p style="font-size:0.85rem; color:var(--text-muted); text-align:center; margin:35px 0;">No customer reviews yet. Be the first to review this product!</p>`;
+    } else {
+      const sortedReviews = [...product.reviews].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      reviewsContainer.innerHTML = sortedReviews.map(rev => {
+        const stars = '★'.repeat(rev.rating) + '☆'.repeat(5 - rev.rating);
+        const dateStr = rev.timestamp ? new Date(rev.timestamp).toLocaleDateString('en-IN', {day: 'numeric', month: 'short', year: 'numeric'}) : 'N/A';
+        const initialLikes = Math.floor((parseInt(rev.id ? rev.id.substring(rev.id.length - 3) : "0") || Math.random() * 100) % 6);
+        return `
+          <div style="background: rgba(255, 255, 255, 0.015); border: 1px solid var(--glass-border); border-radius: 12px; padding: 12px; display:flex; flex-direction:column; gap:6px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center;">
+                <span style="font-weight:700; color:var(--text-main); font-size:0.85rem;">${rev.reviewerName}</span>
+                <span class="verified-badge">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Verified Purchase
+                </span>
+              </div>
+              <span style="color:var(--accent); font-size:0.75rem; letter-spacing:1px;">${stars}</span>
+            </div>
+            <p style="margin:0; font-size:0.82rem; color:var(--text-muted); line-height:1.45; font-weight:400;">${rev.comment}</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+              <div class="helpful-btn-widget" style="display:inline-flex; align-items:center; gap:4px; font-size:0.7rem; color:var(--text-muted); cursor:pointer; transition:var(--transition);" onclick="this.style.color='#25D366'; const countSpan=this.querySelector('.help-count'); countSpan.textContent=parseInt(countSpan.textContent)+1; this.onclick=null;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                <span>Helpful (<span class="help-count">${initialLikes}</span>)</span>
+              </div>
+              <span style="font-size:0.65rem; color:rgba(255,255,255,0.25);">${dateStr}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  // Render ratings distribution widget
+  const ratingDistributionWidget = document.getElementById('rating-distribution-widget');
+  if (ratingDistributionWidget) {
+    const reviews = product.reviews || [];
+    const counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
+    reviews.forEach(r => {
+      if (counts[r.rating] !== undefined) {
+        counts[r.rating]++;
+      }
+    });
+
+    const total = reviews.length;
+    let widgetHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed var(--glass-border); padding-bottom:8px; margin-bottom:5px;">
+        <span style="font-size:0.82rem; font-weight:700; color:var(--text-main);">Rating Distribution</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">${total} Reviews</span>
+      </div>
+    `;
+
+    for (let stars = 5; stars >= 1; stars--) {
+      const count = counts[stars];
+      const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+      widgetHTML += `
+        <div style="display:flex; align-items:center; gap:10px; font-size:0.75rem;">
+          <span style="width:40px; color:var(--text-muted); font-weight:600; display:flex; align-items:center; gap:2px;">
+            <span>${stars}</span>
+            <span style="color:var(--primary); font-size:0.8rem;">★</span>
+          </span>
+          <div style="flex-grow:1; height:6px; background:rgba(255,255,255,0.03); border:1px solid var(--glass-border); border-radius:3px; overflow:hidden;">
+            <div style="width:${percent}%; height:100%; background:linear-gradient(to right, var(--primary), var(--accent)); border-radius:3px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+          </div>
+          <span style="width:30px; text-align:right; color:var(--text-muted); font-weight:600;">${percent}%</span>
+        </div>
+      `;
+    }
+    ratingDistributionWidget.innerHTML = widgetHTML;
+  }
+};
+
+const openProductDetails = (productId) => {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  currentDetailProductId = productId;
+  renderDetailModalContent(product);
+
+  const detailOverlay = document.getElementById('product-detail-overlay');
+  if (detailOverlay) {
+    detailOverlay.classList.add('active');
+    updateBodyScrollState();
+  }
+};
+
+const initProductDetailModal = () => {
+  const detailOverlay = document.getElementById('product-detail-overlay');
+  const closeBtn = document.getElementById('close-detail-modal-btn');
+  const addToCartBtn = document.getElementById('detail-add-to-cart-btn');
+  const buyNowBtn = document.getElementById('detail-buy-now-btn');
+  const wishlistBtn = document.getElementById('detail-wishlist-btn');
+  const writeReviewForm = document.getElementById('write-review-form');
+
+  if (closeBtn && detailOverlay) {
+    closeBtn.addEventListener('click', () => {
+      detailOverlay.classList.remove('active');
+      currentDetailProductId = null;
+      updateBodyScrollState();
+    });
+    
+    detailOverlay.addEventListener('click', (e) => {
+      if (e.target === detailOverlay) {
+        detailOverlay.classList.remove('active');
+        currentDetailProductId = null;
+        updateBodyScrollState();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && detailOverlay && detailOverlay.classList.contains('active')) {
+      detailOverlay.classList.remove('active');
+      currentDetailProductId = null;
+      updateBodyScrollState();
+    }
+  });
+
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', () => {
+      if (currentDetailProductId) {
+        addToCart(currentDetailProductId);
+      }
+    });
+  }
+
+  if (buyNowBtn) {
+    buyNowBtn.addEventListener('click', () => {
+      if (currentDetailProductId) {
+        const product = products.find(p => p.id === currentDetailProductId);
+        if (!product || product.stock <= 0) return;
+
+        const cartItem = cart.find(item => item.product.id === currentDetailProductId);
+        if (!cartItem) {
+          cart.push({ product, quantity: 1 });
+          updateCartUI();
+        }
+
+        // Close details modal
+        detailOverlay.classList.remove('active');
+        currentDetailProductId = null;
+
+        // Open checkout modal directly
+        const checkoutOverlay = document.getElementById('checkout-overlay');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        if (checkoutBtn) {
+          checkoutBtn.click();
+        } else if (checkoutOverlay) {
+          checkoutOverlay.classList.add('active');
+          updateBodyScrollState();
+        }
+      }
+    });
+  }
+
+  if (wishlistBtn) {
+    wishlistBtn.addEventListener('click', () => {
+      if (currentDetailProductId) {
+        toggleWishlist(currentDetailProductId);
+      }
+    });
+  }
+
+  // Interactive Clickable Star Rating handling
+  const ratingStars = document.querySelectorAll('.interactive-star-row span');
+  const ratingValInput = document.getElementById('review-cust-rating');
+
+  if (ratingStars && ratingValInput) {
+    const updateStarsDisplay = (val) => {
+      ratingValInput.value = val;
+      ratingStars.forEach(star => {
+        const starVal = parseInt(star.getAttribute('data-val'));
+        if (starVal <= val) {
+          star.style.color = 'var(--accent)';
+          star.style.textShadow = '0 0 8px rgba(212, 175, 55, 0.5)';
+        } else {
+          star.style.color = 'rgba(255, 255, 255, 0.15)';
+          star.style.textShadow = 'none';
+        }
+      });
+    };
+
+    // Set default selection to 5 stars
+    updateStarsDisplay(5);
+
+    ratingStars.forEach(star => {
+      star.addEventListener('click', () => {
+        const val = parseInt(star.getAttribute('data-val'));
+        updateStarsDisplay(val);
+      });
+
+      star.addEventListener('mouseenter', () => {
+        const val = parseInt(star.getAttribute('data-val'));
+        ratingStars.forEach(s => {
+          const sVal = parseInt(s.getAttribute('data-val'));
+          if (sVal <= val) {
+            s.style.color = 'var(--accent)';
+            s.style.textShadow = '0 0 8px rgba(212, 175, 55, 0.5)';
+          } else {
+            s.style.color = 'rgba(255, 255, 255, 0.15)';
+            s.style.textShadow = 'none';
+          }
+        });
+      });
+
+      star.addEventListener('mouseleave', () => {
+        const activeVal = parseInt(ratingValInput.value) || 5;
+        updateStarsDisplay(activeVal);
+      });
+    });
+  }
+
+  if (writeReviewForm) {
+    writeReviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!currentDetailProductId) return;
+
+      const name = document.getElementById('review-cust-name').value.trim();
+      const rating = parseInt(ratingValInput.value) || 5;
+      const comment = document.getElementById('review-cust-comment').value.trim();
+
+      if (!name || !comment) {
+        showToast("Validation Error", "Please fill in all fields before submitting.", "warning");
+        return;
+      }
+
+      const product = products.find(p => p.id === currentDetailProductId);
+      if (!product) return;
+
+      const newReview = {
+        id: "rev_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
+        reviewerName: name,
+        rating: rating,
+        comment: comment,
+        timestamp: new Date().toISOString()
+      };
+
+      const updatedReviews = product.reviews ? [...product.reviews, newReview] : [newReview];
+      const reviewCount = updatedReviews.length;
+      const sum = updatedReviews.reduce((s, r) => s + r.rating, 0);
+      const avgRating = Math.round((sum / reviewCount) * 10) / 10;
+
+      try {
+        await updateDoc(doc(db, 'products', currentDetailProductId.toString()), {
+          reviews: updatedReviews,
+          rating: avgRating,
+          reviewCount: reviewCount
+        });
+        showToast("Review Submitted", "Thank you! Your review has been added.", "success");
+        writeReviewForm.reset();
+        
+        // Reset stars selector display back to 5 stars
+        if (updateStarsDisplay) {
+          updateStarsDisplay(5);
+        } else {
+          ratingValInput.value = "5";
+          ratingStars.forEach(s => {
+            s.style.color = 'var(--accent)';
+            s.style.textShadow = '0 0 8px rgba(212, 175, 55, 0.5)';
+          });
+        }
+      } catch (err) {
+        showToast("Submission Failed", err.message, "warning");
+      }
+    });
+  }
+};
+
 const renderProducts = (filteredProducts = null) => {
   products = getProducts();
   const listToRender = filteredProducts || products;
@@ -272,7 +651,7 @@ const renderProducts = (filteredProducts = null) => {
     const isOutOfStock = product.stock <= 0;
     const isWishlisted = wishlist.some(item => item.id === product.id);
     return `
-      <div class="product-card" style="animation: fadeInUp 0.5s ease forwards">
+      <div class="product-card" data-id="${product.id}" style="animation: fadeInUp 0.5s ease forwards; cursor: pointer;">
         <div class="product-img" style="position:relative;">
           <img src="${product.image}" alt="${product.name}">
           ${isOutOfStock ? `<div style="position:absolute; top:10px; left:10px; background:#ff4a4a; color:white; font-size:0.7rem; font-weight:800; padding:4px 8px; border-radius:4px;">OUT OF STOCK</div>` : ''}
@@ -322,6 +701,13 @@ const renderProducts = (filteredProducts = null) => {
       toggleWishlist(productId);
     });
   });
+
+  container.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const productId = parseInt(card.getAttribute('data-id'));
+      openProductDetails(productId);
+    });
+  });
 };
 
 // Cart Logic
@@ -364,6 +750,18 @@ const toggleWishlist = (productId) => {
   localStorage.setItem('digisoft_wishlist', JSON.stringify(wishlist));
   renderProducts();
   updateWishlistUI();
+
+  if (currentDetailProductId === productId) {
+    const wishlistBtn = document.getElementById('detail-wishlist-btn');
+    if (wishlistBtn) {
+      const isWishlisted = wishlist.some(item => item.id === productId);
+      wishlistBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="${isWishlisted ? 'var(--primary)' : 'none'}" stroke="${isWishlisted ? 'var(--primary)' : 'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      `;
+    }
+  }
 };
 
 const updateWishlistUI = () => {
@@ -778,6 +1176,15 @@ const initStoreUI = () => {
   const savedCheckoutActive = localStorage.getItem('digisoft_checkout_active') === 'true';
   if (savedCheckoutActive && checkoutOverlay && cart.length > 0) {
     checkoutOverlay.classList.add('active');
+    // Safety cleanup: Ensure sibling overlays are hidden
+    document.getElementById('razorpay-sim-overlay')?.classList.remove('active');
+    document.getElementById('order-success-overlay')?.classList.remove('active');
+    updateBodyScrollState();
+  } else {
+    // If not restoring checkout overlay, clean up all overlay classes
+    ['checkout-overlay', 'razorpay-sim-overlay', 'order-success-overlay'].forEach(id => {
+      document.getElementById(id)?.classList.remove('active');
+    });
     updateBodyScrollState();
   }
 
@@ -1045,6 +1452,10 @@ const initStoreUI = () => {
     if (addressInput) addressInput.value = '';
     
     checkoutOverlay.classList.remove('active');
+    const simOverlay = document.getElementById('razorpay-sim-overlay');
+    if (simOverlay) {
+      simOverlay.classList.remove('active');
+    }
     renderProducts();
     
     // Open Order Success Modal (Invoice Display)
@@ -1736,9 +2147,9 @@ const initContactForm = () => {
 };
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+const init = () => {
   // Safety reset for overlays on page load to prevent persistent active states on refresh
-  ['checkout-overlay', 'razorpay-sim-overlay', 'order-success-overlay'].forEach(id => {
+  ['checkout-overlay', 'razorpay-sim-overlay', 'order-success-overlay', 'product-detail-overlay'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.remove('active');
   });
@@ -1751,6 +2162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initStoreUI();
   initStoreChatbot();
+  initProductDetailModal();
   
   // Mobile Hamburger Menu Toggle
   const menuToggle = document.getElementById('menu-toggle-btn');
@@ -1807,5 +2219,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-});
+};
+
+// Use robust readyState check to ensure init runs immediately if DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 

@@ -237,6 +237,10 @@
           <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Image URL</label>
           <input type="text" id="edit-sku-image" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
         </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Description</label>
+          <textarea id="edit-sku-description" rows="3" style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none; resize:vertical; font-family:inherit;"></textarea>
+        </div>
         <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin-bottom: 1.5rem;">
           <div class="form-group">
             <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Department</label>
@@ -254,7 +258,7 @@
             </select>
           </div>
         </div>
-        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom: 1.5rem;">
+        <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin-bottom: 1.5rem;">
           <div class="form-group">
             <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Price (₹)</label>
             <input type="number" id="edit-sku-price" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
@@ -263,8 +267,12 @@
             <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Stock Level</label>
             <input type="number" id="edit-sku-stock" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
           </div>
+          <div class="form-group">
+            <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 6px;">Products Sold</label>
+            <input type="number" id="edit-sku-sold-count" min="0" required style="width:100%; padding:10px; border-radius:8px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none;">
+          </div>
         </div>
-        <div class="form-group" style="margin-bottom: 2rem;">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
           <label style="display:block; font-size: 0.85rem; color:var(--text-main); margin-bottom: 10px;">Security & Fragile Flags</label>
           <div style="display:flex; gap:20px;">
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
@@ -277,6 +285,36 @@
             </label>
           </div>
         </div>
+        
+        <!-- Ratings & Reviews Section -->
+        <div class="form-group" style="margin-bottom: 2rem; border-top: 1px dashed var(--glass-border); padding-top: 1.5rem;">
+          <label style="display:block; font-size: 0.95rem; color:var(--primary); font-weight:700; margin-bottom: 10px;">Ratings & Customer Reviews</label>
+          
+          <!-- Reviews list manager -->
+          <div id="edit-sku-reviews-container" style="max-height: 180px; overflow-y: auto; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 8px; padding: 10px; margin-bottom: 15px;">
+            <p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin:10px 0;">No reviews registered for this product.</p>
+          </div>
+
+          <!-- Add new review manually -->
+          <div style="background: rgba(197, 160, 89, 0.05); border: 1px solid rgba(197, 160, 89, 0.2); border-radius: 8px; padding: 12px;">
+            <h5 style="margin: 0 0 10px 0; color: var(--text-main); font-size: 0.85rem; font-weight: 600;">Add Review Manually</h5>
+            <div class="form-row" style="display:grid; grid-template-columns: 2fr 1fr; gap:10px; margin-bottom: 10px;">
+              <input type="text" id="new-review-name" placeholder="Reviewer Name" style="width:100%; padding:8px; border-radius:6px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none; font-size: 0.8rem;">
+              <select id="new-review-rating" style="width:100%; padding:8px; border-radius:6px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none; font-size: 0.8rem;">
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+              </select>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <textarea id="new-review-comment" rows="2" placeholder="Review Comment..." style="flex-grow:1; padding:8px; border-radius:6px; background:var(--glass); border:1px solid var(--glass-border); color:var(--text-main); outline:none; font-size: 0.8rem; resize:none; font-family:inherit;"></textarea>
+              <button type="button" class="btn btn-outline" id="add-review-manual-btn" style="padding: 0 15px; font-size: 0.8rem; border-radius: 6px; flex-shrink:0;">Add</button>
+            </div>
+          </div>
+        </div>
+        
         <button type="submit" class="btn btn-primary btn-block">Apply Master Update</button>
       </form>
     </div>
